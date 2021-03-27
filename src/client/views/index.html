@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Test</title>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <main>
+      <header>
+        <h1>Using Natural Language Processing to evaluate a news post!</h1>
+      </header>
+
+      <section>
+        <form class="" id="text" onsubmit="return Client.handleSubmit(event)">
+          <input
+            id="url"
+            type="text"
+            name="input"
+            value=""
+            placeholder="Input news article url here"
+          />
+          <input
+            type="submit"
+            id="submit"
+            name=""
+            value="Analyse"
+            onclick="return Client.handleSubmit(event)"
+            onsubmit="return handleSubmit(event)"
+          />
+        </form>
+      </section>
+
+      <section>
+        <div>
+          <div id="results"><strong>Results</strong></div>
+          <ul>
+            <div id="confidence"><li></li></div>
+            <div id="subjectivity"><li></li></div>
+            <div id="polarity"><li></li></div>
+            <div id="agreement"><li></li></div>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>By Etanami Olatunji &#169; Udacity</p>
+    </footer>
+    <script>
+      //checking service workers
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js');
+        });
+      }
+    </script>
+  </body>
+</html>
