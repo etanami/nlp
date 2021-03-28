@@ -28,15 +28,16 @@ function handleSubmit(event) {
 }
 
 async function updateUI(res) {
+  console.log(res);
   // Gets API information from the server
-  document.getElementById('#confidence').innerHTML =
+  document.getElementById('confidence').innerHTML =
     'The feeling of confidence is ' + res.confidence + '%';
-  document.getElementById('#subjectivity').innerHTML =
+  document.getElementById('subjectivity').innerHTML =
     'The article is ' + res.subjectivity;
-  document.getElementById('#polarity').innerHTML = `The tone is ${scoreTag(
+  document.getElementById('polarity').innerHTML = `The tone is ${scoreTag(
     res.score_tag
   )}`;
-  document.getElementById('#agreement').innerHTML =
+  document.getElementById('agreement').innerHTML =
     'There is ' + res.agreement + ' within the tone';
 }
 
