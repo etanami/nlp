@@ -4,6 +4,7 @@ function handleSubmit(event) {
   // check what link was put into the form field
   let formUrl = document.getElementById('url').value;
 
+  //Checks first for valid URL then post route to server for API call
   if (Client.checkForUrl(formUrl)) {
     fetch('http://localhost:8081/apiCall', {
       method: 'POST',
@@ -27,21 +28,26 @@ function handleSubmit(event) {
   }
 }
 
+//function to update the UI with the results of the analysis
 async function updateUI(res) {
   console.log(res);
-  // Gets API information from the server
-  document.getElementById('confidence').innerHTML =
+
+  //Find and name HTML elements
+  const confidenceEl = document.getElementById('confidence');
+  const subjectivityEl = document.getElementById('subjectivity');
+  const polarityEl = document.getElementById('polarity');
+  const agreementEl = document.getElementById('agreement');
+
+  // Gets API information and updates UI
+  confidenceEl.innerHTML =
     'The feeling of confidence is ' + res.confidence + '%';
-  document.getElementById('subjectivity').innerHTML =
-    'The article is ' + res.subjectivity;
-  document.getElementById('polarity').innerHTML = `The tone is ${scoreTag(
-    res.score_tag
-  )}`;
-  document.getElementById('agreement').innerHTML =
-    'There is ' + res.agreement + ' within the tone';
+  subjectivityEl.innerHTML = 'The article is ' + res.subjectivity;
+  polarityEl.innerHTML = `The tone is ${scoreTag(res.score_tag)}`;
+  agreementEl.innerHTML = 'There is ' + res.agreement + ' within the tone';
 }
 
-const scoreTag = (score_tag) => {
+//returns the type of tone analyzed by the api
+export const scoreTag = (score_tag) => {
   if (score_tag === 'P') {
     return 'Positive';
   } else if (score_tag === 'P+') {
@@ -53,10 +59,8 @@ const scoreTag = (score_tag) => {
   } else if (score_tag === 'NEU') {
     return 'Neutral';
   } else {
-    return '';
+    return 'Non Sentimental';
   }
 };
-
-export { scoreTag };
 
 export { handleSubmit };
